@@ -24,10 +24,10 @@ Card.new(question:"Deck 2 Card 2", answer:"nothing", deck_id: 2 )
 Card.new(question:"Deck 2 Card 3", answer:"nothing", deck_id: 2 )
 Card.new(question:"Deck 2 Card 4", answer:"nothing", deck_id: 2 )
 
-Card.all.save
-User.all.save
-Deck.all.save
-Round.all.save
+# Card.all.save
+# User.all.save
+# Deck.all.save
+# Round.all.save
 
 
 
