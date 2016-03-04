@@ -1,28 +1,28 @@
-User.new(username:"Bob", password_hash:"password")
-User.new(username:"Peter", password_hash:"password123")
+User.create(username:"Bob", password_hash:"password")
+User.create(username:"Peter", password_hash:"password123")
 
 User.all.each do |user|
   n=0
-  user.rounds << Round.new(deck_id:n, user_id:n)
+  user.rounds << Round.create(deck_id:n, user_id:n)
   n+=1
 end
 
 
 
-Deck.new(name:"best groups")
-Deck.new(name:"worst groups")
+Deck.create(name:"best groups")
+Deck.create(name:"worst groups")
 
-Card.new(question: "Deck 1 Card 1", answer: "nothing", deck_id: 1)
-Card.new(question: "Deck 1 Card 2", answer: "nothing", deck_id: 1)
-Card.new(question: "Deck 1 Card 3", answer: "nothing", deck_id: 1)
-Card.new(question: "Deck 1 Card 4", answer: "nothing", deck_id: 1)
+Card.create(question: "Deck 1 Card 1", answer: "nothing", deck_id: 1)
+Card.create(question: "Deck 1 Card 2", answer: "nothing", deck_id: 1)
+Card.create(question: "Deck 1 Card 3", answer: "nothing", deck_id: 1)
+Card.create(question: "Deck 1 Card 4", answer: "nothing", deck_id: 1)
 
 
 
-Card.new(question:"Deck 2 Card 1", answer:"nothing", deck_id: 2 )
-Card.new(question:"Deck 2 Card 2", answer:"nothing", deck_id: 2 )
-Card.new(question:"Deck 2 Card 3", answer:"nothing", deck_id: 2 )
-Card.new(question:"Deck 2 Card 4", answer:"nothing", deck_id: 2 )
+Card.create(question:"Deck 2 Card 1", answer:"nothing", deck_id: 2 )
+Card.create(question:"Deck 2 Card 2", answer:"nothing", deck_id: 2 )
+Card.create(question:"Deck 2 Card 3", answer:"nothing", deck_id: 2 )
+Card.create(question:"Deck 2 Card 4", answer:"nothing", deck_id: 2 )
 
 # Card.all.save
 # User.all.save
