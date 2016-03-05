@@ -5,9 +5,12 @@ post '/decks/cards/:id/rounds' do
   # Round.create(user_id:1, deck_id:1)
   @deck = @answered_card.deck
 
+
+
   if  (@round.nil?) || (@round.started == false)
+    # binding.pry
     @round = Round.find_by(user_id: session[:logged_in], started: false)
-    @round.started = true
+    @round.update_attribute(:started, true)
   end
 
 
@@ -20,7 +23,7 @@ post '/decks/cards/:id/rounds' do
     @card = @deck.pick_cards_until_over
       erb :'/rounds/show'
   else
-     @answered_card.guesses << Guess.create(round_id: 1, correct?: false)
+     @answered_card.guesses << Guess.create(round_id: @round.id, correct?: false)
          @card = @deck.pick_cards_until_over
       erb :'/rounds/show'
   end
