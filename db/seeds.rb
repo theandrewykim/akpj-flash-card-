@@ -1,12 +1,6 @@
 User.create(username:"Bob", password_hash:"password")
 User.create(username:"Peter", password_hash:"password123")
 
-User.all.each do |user|
-  n=0
-  user.rounds << Round.create(deck_id:n, user_id:n)
-  n+=1
-end
-
 
 
 Deck.create(name:"best groups")

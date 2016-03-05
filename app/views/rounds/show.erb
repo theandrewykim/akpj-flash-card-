@@ -1,0 +1,12 @@
+Hello World
+<br>
+
+<%= @card.question %>
+<br>
+
+<form method="post" action="/decks/cards/<%=@card.id%>/rounds">
+  <br>
+  <input type="text" name="answer[answer]">
+  <br> <br>
+  <input type="submit" value="Submit Answer">
+</form>
