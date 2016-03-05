@@ -1,7 +1,9 @@
-<p>
-  Deck: <%=@deck.name%>
-</p>
+<div class="container">
+  <h3>You selected:</h3>
+    <div class="selected_deck">
+      <p><%=@deck.name%></p>
+    </div>
 
 <form method="GET" action="/decks/<%=@deck.id%>/rounds">
-  <input type="submit" value="Get started">
+  <input type="submit" class="start_button" value="Get started">
 </form>

@@ -1,16 +1,12 @@
-Hello World
-<br>
-<% if @card.nil?%>
-<p>GAME DONE</p>
-<%else%>
-<%= @card.question %>
-<br>
+<div class="container">
+  <% if @card.nil?%>
+    <p>GAME OVER</p>
+  <%else%>
+    <p class="question"><%= @card.question %></p>
 
-<form method="post" action="/decks/cards/<%=@card.id%>/rounds">
-  <br>
-  <input type="text" name="answer[answer]">
-  <br> <br>
-  <input type="submit" value="Submit Answer">
-</form>
-
-<%end%>
+    <form method="post" action="/decks/cards/<%=@card.id%>/rounds">
+      <input type="text" class="answer_box" name="answer[answer]"><br>
+      <input type="submit" class="answer_button" value="Submit Answer">
+    </form>
+  <%end%>
+</div>
