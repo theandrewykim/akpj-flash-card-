@@ -39,25 +39,38 @@ post '/decks/cards/:id/rounds' do
 #   end
 # end
 
-def pick_card
-  @card = @answered_card.deck.cards.sample
-    if @card.correct_yet?
-      pick_card
-    erb :'rounds/show'
-  else
-    @card
-    end
+def pick_card(card)
+    if card.correct_yet?
+     @card = card.deck.cards.sample
+   else
+    pick_card(@card)
+  end
 end
-
 
 
 if @answered_card.answer == params[:answer][:answer]
-  until @answered_card.deck.all_correct?
-    pick_card
+  @answered_card.guesses << Guess.create(round_id: 1, correct?: true)
+  if  !@answered_card.deck.all_correct?
+
+    pick_card(@answered_card.deck.cards.sample)
+
+    erb :'/rounds/show'
   end
-"THIS WORKED MAN"
+  else
+   @answered_card.guesses << Guess.create(round_id: 1, correct?: false)
+    if  !@answered_card.deck.all_correct?
+
+    pick_card(@answered_card.deck.cards.sample)
+    erb :'/rounds/show'
+    end
+  end
+
 end
-end
+
+# #   end
+# # "THIS WORKED MAN"
+# # end
+# end
 
 
 
