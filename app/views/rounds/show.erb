@@ -1,6 +1,8 @@
 Hello World
 <br>
-
+<% if @card.nil?%>
+<p>GAME DONE</p>
+<%else%>
 <%= @card.question %>
 <br>
 
@@ -10,3 +12,5 @@ Hello World
   <br> <br>
   <input type="submit" value="Submit Answer">
 </form>
+
+<%end%>
