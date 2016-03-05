@@ -47,16 +47,24 @@ def pick_card(card)
   end
 end
 
+
 if @answered_card.answer == params[:answer][:answer]
   @answered_card.guesses << Guess.create(round_id: 1, correct?: true)
-if  !@answered_card.deck.all_correct?
+  if  !@answered_card.deck.all_correct?
+
+    pick_card(@answered_card.deck.cards.sample)
+
+    erb :'/rounds/show'
+  end
+  else
+   @answered_card.guesses << Guess.create(round_id: 1, correct?: false)
+    if  !@answered_card.deck.all_correct?
 
     pick_card(@answered_card.deck.cards.sample)
     erb :'/rounds/show'
-else
-  "FINISHED"
-end
-end
+    end
+  end
+
 end
 
 # #   end
