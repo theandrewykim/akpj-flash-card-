@@ -4,12 +4,12 @@ class Card < ActiveRecord::Base
   has_many :guesses
 
   def correct_yet?
-    self.guesses.each do |guess|
-      if guess.correct?
-          return true
-        end
-    end
-  end
+    if self.guesses.empty?
+      false
+    else
+    self.guesses.any? {|guess| guess.correct? == true}
+       end
+end
 
 
 end

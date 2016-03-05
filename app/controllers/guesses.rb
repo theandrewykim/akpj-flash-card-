@@ -4,68 +4,35 @@ post '/decks/cards/:id/rounds' do
   User.create(username:"Asian Peter", password_hash:"GreekPeter")
   Round.create(user_id:1, deck_id:1)
 
-#    @answered_card.deck.all_correct?
-
-
-#   if @answered_card.answer == params[:answer][:answer]
-#     @answered_card.guesses << Guess.create(round_id: 1, correct?: true)
-#     #Put this in the model later
-#     @card = @answered_card.deck.cards.sample
-
-#     if @card.guesses.empty? || @card.correct_yet?
-#       @card = @card.deck.cards.sample
-#     end
-
-#   else
-#      @card.guesses << Guess.create(round_id: 1, correct?: false)
-#      @card = @answered_card.deck.cards.sample
-#         if @card.guesses.empty? || @card.correct_yet?
-#       @card = @card.deck.cards.sample
-#     end
-#  erb :'/rounds/show'
-#   end
-# end
-
-
-# if @answered_card.answer == params[:answer][:answer]
-#     until @answered_card.deck.all_correct?
-#       @card = @answered_card.deck.cards.sample
-#         until !@card.correct_yet?
-#           @card.deck.cards.sample
-#         end
-#       erb :'/rounds/show'
-#     end
-#      "THIS WORKED MAN"
-#   end
-# end
-
-def pick_card
-  @card = @answered_card.deck.cards.sample
-    if @card.correct_yet?
-      pick_card
-    erb :'rounds/show'
-  else
-    @card
-    end
+def pick_card(card)
+    if card.correct_yet?
+      pick_card(card.deck.cards.sample)
+   else
+     @card = card
+  end
 end
-
 
 
 if @answered_card.answer == params[:answer][:answer]
-  until @answered_card.deck.all_correct?
-    pick_card
+  @answered_card.guesses << Guess.create(round_id: 1, correct?: true)
+  if  !@answered_card.deck.all_correct?
+    random_card = @answered_card.deck.cards.sample
+    pick_card(random_card)
+
+    erb :'/rounds/show'
   end
-"THIS WORKED MAN"
+  else
+   @answered_card.guesses << Guess.create(round_id: 1, correct?: false)
+    if  !@answered_card.deck.all_correct?
+      random_card = @answered_card.deck.cards.sample
+    pick_card(random_card)
+    erb :'/rounds/show'
+    end
+  end
+
 end
-end
 
 
 
 
 
-
-
-
-
-  # @card.guesses << Guess.new(round_id: 1)
-  # erb :'/rounds/show'
