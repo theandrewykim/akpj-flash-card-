@@ -5,7 +5,7 @@ get '/decks/:id/rounds/:round_id' do
 if logged_in?
   @deck = Deck.find_by(id: params[:id])
   @card = @deck.cards.sample
-  User.find(session[:logged_in]).rounds << Round.create(deck_id: @deck.id)
+  @round = Round.find(params[:round_id])
 
 
   erb :'/rounds/show'
