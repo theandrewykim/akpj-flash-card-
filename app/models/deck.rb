@@ -15,7 +15,9 @@ class Deck < ActiveRecord::Base
   end
 
 def pick_cards_until_over
-    if  !self.all_correct?
+    if  self.all_correct?
+      return nil
+    else
     random_card = self.cards.sample
     self.pick_card(random_card)
   end

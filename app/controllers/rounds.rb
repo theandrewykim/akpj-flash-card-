@@ -4,8 +4,13 @@ get '/decks/:id/rounds/:round_id' do
 
 if logged_in?
   @deck = Deck.find_by(id: params[:id])
-  @card = @deck.cards.sample
+  # @card = @deck.pick_cards_until_over
   @round = Round.find(params[:round_id])
+  if @round.started
+    @card = @deck.pick_cards_until_over
+  else
+    @card = @deck.cards.sample
+  end
 
 
   erb :'/rounds/show'
