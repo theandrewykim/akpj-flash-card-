@@ -7,7 +7,7 @@ get '/decks' do
 end
 
 get '/decks/stats' do
-  if logged_in
+  if logged_in?
  @user = User.find(session[:logged_in])
 end
 erb :'decks/stats'

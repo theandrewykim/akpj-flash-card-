@@ -11,7 +11,7 @@ def first_try_count
   cards = Card.where(deck_id: self.deck_id)
   first_try_count = 0
   cards.each do |card|
-    first_try_count +=1 if card.first_attempt?
+    first_try_count +=1 if card.first_attempt?(self)
     end
     first_try_count
   end
