@@ -2,8 +2,8 @@ class Deck < ActiveRecord::Base
   has_many :cards
   has_many :rounds
 
-  def all_correct?
-    self.cards.all?{|card| card.correct_yet? == true}
+  def all_correct?(round)
+    Card.where(deck_id: round.deck_id).all?{|card| card.correct_yet? == true}
   end
 
   def pick_card(card)
@@ -14,8 +14,8 @@ class Deck < ActiveRecord::Base
     end
   end
 
-def pick_cards_until_over
-    if  self.all_correct?
+def pick_cards_until_over(round)
+    if  self.all_correct?(round)
       return nil
     else
     random_card = self.cards.sample

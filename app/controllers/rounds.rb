@@ -7,7 +7,7 @@ if logged_in?
   # @card = @deck.pick_cards_until_over
   @round = Round.find(params[:round_id])
   if @round.started
-    @card = @deck.pick_cards_until_over
+    @card = @deck.pick_cards_until_over(@round)
   else
     @card = @deck.cards.sample
   end

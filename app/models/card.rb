@@ -9,7 +9,13 @@ class Card < ActiveRecord::Base
     else
     self.guesses.any? {|guess| guess.correct? == true}
        end
-end
+  end
+
+  def first_attempt?
+    if self.guesses.count == 1 && self.correct_yet?
+      return true
+      end
+  end
 
 
 end
