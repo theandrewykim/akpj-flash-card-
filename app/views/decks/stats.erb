@@ -1,7 +1,12 @@
 
+<%if @user.rounds.empty?%>
+<p> You have not played a game yet</p>
+<%else%>
 <%@user.rounds.each do |round|%>
-<p> It took you <%=round.guesses.length %> guesses to finish the game</p>
+<p> DECK NAME: <%=round.deck.name.upcase%><br><br>
+  It took you <%=round.total_guesses.length %> guesses to finish the game</p>
 <p>You answered <%=round.first_try_count%> cards on the first try </p>
+  <%end%>
   <%end%>
 
 

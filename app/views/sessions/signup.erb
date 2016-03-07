@@ -1,10 +1,11 @@
 <h3>Sign up to play our game!</h3>
 
 <p>
+  <%=erb :'_errors', :locals => {:errors => @errors}%>
 	<form method="POST" action="/sessions">  User name:<br>
 		<input type="text" name="signup[username]"><br>
 		Password:<br>
-		<input type="text" name="password[password_hash]"><br>
+		<input type="password" name="password[password_hash]"><br>
 		<input type="submit" value="Sign up!">
 	</form>
 </p>

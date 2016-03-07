@@ -6,9 +6,16 @@ post '/sessions' do
   #Change these when views are made
   @user= User.new(params[:signup])
   @user.password=(params[:password][:password_hash])
-  @user.save
-  @decks = Deck.all
-  erb :'/decks/index'
+
+  if @user.save
+    @decks = Deck.all
+    erb :'/decks/index'
+  else
+   @errors = @user.errors.messages
+     @decks = Deck.all
+    erb :'/sessions/signup'
+  end
+
 end
 
 
@@ -22,9 +29,9 @@ get '/sessions' do
       session[:logged_in] = logged_in.id
       @decks = Deck.all
       erb :'decks/index'
-      #Add real error
     else
-      "Something went wrong with your log in man"
+      @decks = Deck.all
+      erb :'decks/index'
     end
   end
 

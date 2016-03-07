@@ -2,6 +2,8 @@
 
 class User < ActiveRecord::Base
   has_many :rounds
+  validates_presence_of :username, :password, :message => 'Invalid Username or Password'
+  validates_uniqueness_of :username, :message => "Username is already taken"
 
 include BCrypt
 

@@ -1,0 +1,5 @@
+<%if @errors%>
+  <%@errors.each do |message, value|%>
+    <%=value.join(" ")%>
+  <%end%>
+<%end%>

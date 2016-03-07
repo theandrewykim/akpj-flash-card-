@@ -6,11 +6,14 @@ class Round < ActiveRecord::Base
   belongs_to :user
   belongs_to :deck
 
+def total_guesses
+  Guess.where(round_id:self.id)
+end
 
 def first_try_count
   cards = Card.where(deck_id: self.deck_id)
   first_try_count = 0
-  
+
   cards.each do |card|
     first_try_count +=1 if card.first_attempt?(self)
     end

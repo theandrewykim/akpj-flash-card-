@@ -13,7 +13,8 @@ class Card < ActiveRecord::Base
   end
 
   def first_attempt?(round)
-    if self.guesses.count == 1 && self.correct_yet?(round)
+    guesses = Guess.where(round_id: round.id,  card_id: self.id)
+    if guesses.count == 1 && self.correct_yet?(round)
       return true
     end
   end
