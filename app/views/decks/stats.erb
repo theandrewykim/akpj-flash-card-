@@ -1,6 +1,7 @@
+
 <%@user.rounds.each do |round|%>
-  <%=round.guesses.length %>
-  <%=round.first_try_count%>
+<p> It took you <%=round.guesses.length %> guesses to finish the game</p>
+<p>You answered <%=round.first_try_count%> cards on the first try </p>
   <%end%>
 
 

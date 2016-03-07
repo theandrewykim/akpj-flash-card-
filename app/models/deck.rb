@@ -14,14 +14,13 @@ class Deck < ActiveRecord::Base
     end
   end
 
-def pick_cards_until_over(round)
-    if  self.all_correct?(round)
-      return nil
-    else
-    random_card = self.cards.sample
-    self.pick_card(random_card, round)
+  def pick_cards_until_over(round)
+      if  self.all_correct?(round)
+        return nil
+      else
+        random_card = self.cards.sample
+        self.pick_card(random_card, round)
+    end
   end
-end
-
 
 end
