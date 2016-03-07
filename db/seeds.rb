@@ -1,7 +1,4 @@
-User.create(username:"Bob", password_hash:"password")
-User.create(username:"Peter", password_hash:"password123")
-
-
+User.create(username:"bob", password_hash:"password")
 
 Deck.create(name:"best groups")
 Deck.create(name:"worst groups")

@@ -3,13 +3,20 @@ class Card < ActiveRecord::Base
   belongs_to :deck
   has_many :guesses
 
-  def correct_yet?
-    if self.guesses.empty?
+  def correct_yet?(round)
+   guesses = Guess.where(round_id: round.id,  card_id: self.id)
+    if guesses.empty?
       false
     else
-    self.guesses.any? {|guess| guess.correct? == true}
+    guesses.any? {|guess| guess.correct? == true}
        end
-end
+  end
+
+  def first_attempt?(round)
+    if self.guesses.count == 1 && self.correct_yet?(round)
+      return true
+      end
+  end
 
 
 end

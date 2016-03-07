@@ -1,35 +1,40 @@
 
-post '/decks/cards/:id/rounds' do
-  @answered_card = Card.find(params[:id])
-  User.create(username:"Asian Peter", password_hash:"GreekPeter")
-  Round.create(user_id:1, deck_id:1)
-
-def pick_card(card)
-    if card.correct_yet?
-      pick_card(card.deck.cards.sample)
-   else
-     @card = card
-  end
-end
+post '/rounds/:round_id/guess' do
+  @answered_card = Card.find(params[:card_id])
+  @round = Round.find(params[:round_id])
+  deck= @answered_card.deck
+  # # User.create(username:"Asian Peter", password_hash:"GreekPeter")
+  # # Round.create(user_id:1, deck_id:1)
+  # @deck = @answered_card.deck
 
 
-if @answered_card.answer == params[:answer][:answer]
-  @answered_card.guesses << Guess.create(round_id: 1, correct?: true)
-  if  !@answered_card.deck.all_correct?
-    random_card = @answered_card.deck.cards.sample
-    pick_card(random_card)
 
-    erb :'/rounds/show'
-  end
+  # if  (@round.nil?) || (@round.started == false)
+  #   # binding.pry
+  #   @round = Round.find_by(user_id: session[:logged_in], started: false)
+  #   @round.update_attribute(:started, true)
+  # end
+
+
+# binding.pry
+
+  if @answered_card.answer == params[:answer][:answer]
+    # @round = Round.find_by(user_id: session[:logged_in])
+    @answered_card.guesses << Guess.create(round_id: @round.id, correct?: true)
+    # @card = @deck.pick_cards_until_over
+    @round.update_attribute(:started, true)
+      redirect "/decks/#{deck.id}/rounds/#{@round.id}"
+      # erb :'/rounds/show'
+
   else
-   @answered_card.guesses << Guess.create(round_id: 1, correct?: false)
-    if  !@answered_card.deck.all_correct?
-      random_card = @answered_card.deck.cards.sample
-    pick_card(random_card)
-    erb :'/rounds/show'
-    end
+     @answered_card.guesses << Guess.create(round_id: @round.id, correct?: false)
+     # @card = @deck.pick_cards_until_over
+     @round.update_attribute(:started, true)
+      redirect "/decks/#{deck.id}/rounds/#{@round.id}"
+      # erb :'/rounds/show'
   end
 
+# binding.pry
 end
 
 

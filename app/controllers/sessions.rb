@@ -2,13 +2,13 @@ get '/sessions/signup' do
   erb :'/sessions/signup'
 end
 
-post '/sessions/usersv' do
+post '/sessions' do
   #Change these when views are made
   @user= User.new(params[:signup])
-  @user.password=(params[:password][:password])
+  @user.password=(params[:password][:password_hash])
   @user.save
-  @entries = Entry.all
-  erb :'/entries/index'
+  @decks = Deck.all
+  erb :'/decks/index'
 end
 
 
@@ -17,11 +17,11 @@ get '/sessions/login' do
 end
 
 get '/sessions' do
-  logged_in = User.find_by(user_name: params[:login][:user_name])
-    if logged_in && logged_in.password == params[:login][:password_digest]
+  logged_in = User.find_by(username: params[:login][:username])
+    if logged_in && logged_in.password == params[:login][:password_hash]
       session[:logged_in] = logged_in.id
-      @entries = Entry.all
-      erb :'entries/index'
+      @decks = Deck.all
+      erb :'decks/index'
       #Add real error
     else
       "Something went wrong with your log in man"
@@ -30,7 +30,7 @@ get '/sessions' do
 
   get '/sessions/logout' do
     session.clear
-    @entries = Entry.all
-    erb :'entries/index'
+    @decks = Deck.all
+    erb :'decks/index'
     #change when real view is ready
   end

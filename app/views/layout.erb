@@ -17,6 +17,13 @@
 
   <title></title>
 </head>
+<nav><%if logged_in?%><a href="/sessions/logout">LOG OUT</a>
+  <a href="/decks/stats">STATS BOI</a>
+<%else%>
+<a href="/sessions/login">LOG IN</a>
+<a href="/sessions/signup">SIGN UP</a>
+    <%end%>
+</nav>
 <h3>Flashy Bird</h3>
 <body>
   <%= yield %>
