@@ -8,15 +8,14 @@ class Card < ActiveRecord::Base
     if guesses.empty?
       false
     else
-    guesses.any? {|guess| guess.correct? == true}
-       end
+      guesses.any? {|guess| guess.correct? == true}
+    end
   end
 
   def first_attempt?(round)
     if self.guesses.count == 1 && self.correct_yet?(round)
       return true
-      end
+    end
   end
-
 
 end
